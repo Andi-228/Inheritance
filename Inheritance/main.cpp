@@ -3,54 +3,39 @@
 using namespace std;
 
 class base {
-protected:
+private:
 	int a;
+protected:
 	int b;
 public:
-	base() { cout << "Base constructor" << endl;
-	a = 10;
-	b = 20;
-	}
-	void showBase() { cout << "a = " << a << ", b = " << b << endl; }
-	~base() { cout << "Base destruction" << endl; }
-
-};
-
-class derived : public base {
-private:
 	int c;
-public:
-	derived() {
-		cout << "Derived constructor" << endl;
-		c = 30;
-	}
-	void showDerived() { cout << "c = " << c << endl; }
-	~derived() { cout << "Derived destruction" << endl; }
+	void showBase() { cout << "a = " << a <<
+							", b = " << b <<
+							", c =" << c << endl; }
+
+	void set() { a = 100; b = 200; c = 300; }
+
 
 };
 
-
-class derived2 : public derived {
+class derived : protected base {
 private:
-	int d;
+	
 public:
-	derived2() {
-		cout << "Derived2 constructor" << endl;
-		d = 100;
+	void setB(int val) { b = val; }
+	void setC(int val) { c = val; }
+	void show(){
+		cout << "b = " << b <<
+			", c =" << c << endl;
 	}
-	void showDerived2() { cout << "d = " << d << endl; }
-	~derived2() { cout << "Derived2 destruction" << endl; }
-
 };
+
+
 int main() {
-	base b;
-	b.showBase();
 	derived d;
-	d.showBase();
-	d.showDerived();
-	derived2 d2;
-	d2.showDerived();
-	d2.showDerived2();
+	d.setB(2);
+	d.setC(3);
+	d.show();
 
 	system("pause");
 	return 0;
